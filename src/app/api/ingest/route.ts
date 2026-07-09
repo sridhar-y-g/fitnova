@@ -2,6 +2,8 @@ import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { GoogleGenAI, Type } from '@google/genai';
 
+export const maxDuration = 60; // Allow up to 60 seconds on Vercel for Gemini audio processing
+
 // High-fidelity fallback scenarios for mock ingestion
 const FALLBACK_SCENARIOS = [
   {
