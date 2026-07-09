@@ -1,0 +1,59 @@
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Organization {
+  id    String @id @default(uuid())
+  name  String
+  teams Team[]
+}
+
+model Team {
+  id               String       @id @default(uuid())
+  orgId            String
+  name             String
+  teamLeaderName   String
+  organization     Organization @relation(fields: [orgId], references: [id], onDelete: Cascade)
+  advisors         Advisor[]
+}
+
+model Advisor {
+  id         String      @id @default(uuid())
+  teamId     String
+  name       String
+  email      String
+  team       Team        @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  callAudits CallAudit[]
+}
+
+model CallAudit {
+  id                     String     @id @default(uuid())
+  advisorId              String
+  callDate               DateTime   @default(now())
+  overallScore           Int
+  needsDiscoveryScore    Int
+  objectionHandlingScore Int
+  complianceScore        Int
+  audioUrl               String?
+  duration               String     @default("0:00")
+  rawTranscript          Json
+  advisor                Advisor    @relation(fields: [advisorId], references: [id], onDelete: Cascade)
+  callFlags              CallFlag[]
+}
+
+model CallFlag {
+  id              String    @id @default(uuid())
+  callId          String
+  category        String
+  severity        String
+  quotedLine      String    @db.VarChar(1000)
+  reason          String    @db.VarChar(1000)
+  timestampAnchor String
+  isContested     Boolean   @default(false)
+  callAudit       CallAudit @relation(fields: [callId], references: [id], onDelete: Cascade)
+}

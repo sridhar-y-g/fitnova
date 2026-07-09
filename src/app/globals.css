@@ -1,0 +1,204 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-chassis: #e0e5ec;
+  --color-panel: #f0f2f5;
+  --color-recessed: #d1d9e6;
+  --color-primary-text: #2d3436;
+  --color-muted-text: #4a5568;
+  --color-safety-orange: #ff4757;
+  --font-sans: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+:root {
+  --background: #e0e5ec;
+  --foreground: #2d3436;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+}
+
+/* Neumorphic Shadow Helpers */
+.shadow-card {
+  box-shadow: 8px 8px 16px #babecc, -8px -8px 16px #ffffff;
+}
+
+.shadow-card-hover {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.shadow-card-hover:hover {
+  box-shadow: 12px 12px 24px #babecc, -12px -12px 24px #ffffff, inset 1px 1px 0 rgba(255,255,255,0.5);
+  transform: translateY(-4px);
+}
+
+.shadow-floating {
+  box-shadow: 12px 12px 24px #babecc, -12px -12px 24px #ffffff, inset 1px 1px 0 rgba(255,255,255,0.5);
+}
+
+.shadow-pressed {
+  box-shadow: inset 6px 6px 12px #babecc, inset -6px -6px 12px #ffffff;
+}
+
+.shadow-recessed {
+  box-shadow: inset 4px 4px 8px #babecc, inset -4px -4px 8px #ffffff;
+}
+
+.shadow-orange-glow {
+  box-shadow: 0 0 12px 3px rgba(255, 71, 87, 0.5);
+}
+
+/* Mechanical Textures */
+.noise-overlay {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.12;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+
+.carbon-pattern {
+  background: radial-gradient(rgba(0, 0, 0, 0.25) 15%, transparent 16%) 0 0,
+              radial-gradient(rgba(0, 0, 0, 0.25) 15%, transparent 16%) 4px 4px;
+  background-color: #1e2224;
+  background-size: 8px 8px;
+  box-shadow: inset 2px 2px 5px rgba(0,0,0,0.5);
+}
+
+.grid-pattern {
+  background-image: linear-gradient(rgba(186, 190, 204, 0.3) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(186, 190, 204, 0.3) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.scanlines {
+  background: linear-gradient(
+    rgba(18, 16, 16, 0) 50%, 
+    rgba(0, 0, 0, 0.25) 50%
+  );
+  background-size: 100% 4px;
+}
+
+/* Mechanical Screws */
+.screw {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #a3b1c6 30%, #e0e5ec 70%);
+  box-shadow: inset 1px 1px 2px rgba(0,0,0,0.4), 1px 1px 1px #ffffff;
+  position: relative;
+}
+.screw::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 6px;
+  height: 1px;
+  background: #4a5568;
+  transform: translate(-50%, -50%) rotate(45deg);
+  box-shadow: 0 0.5px 0.5px rgba(255,255,255,0.5);
+}
+
+/* LED Indicator Glows */
+.led-green {
+  background-color: #22c55e;
+  box-shadow: 0 0 10px 2px rgba(34, 197, 94, 0.8), inset 1px 1px 2px rgba(255,255,255,0.5);
+}
+.led-red {
+  background-color: #ef4444;
+  box-shadow: 0 0 10px 2px rgba(239, 68, 68, 0.8), inset 1px 1px 2px rgba(255,255,255,0.5);
+}
+.led-orange {
+  background-color: #f97316;
+  box-shadow: 0 0 10px 2px rgba(249, 115, 22, 0.8), inset 1px 1px 2px rgba(255,255,255,0.5);
+}
+
+/* Custom Scrollbar */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #d1d9e6;
+  border-radius: 3px;
+  box-shadow: inset 1px 1px 3px rgba(0,0,0,0.1);
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #babecc;
+  border-radius: 3px;
+  box-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+  border: 1px solid #d1d9e6;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #a3b1c6;
+}
+
+/* Animations */
+.animate-led-pulse {
+  animation: led-pulse 2s infinite ease-in-out;
+}
+
+@keyframes led-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); filter: brightness(1); }
+  50% { opacity: 0.6; transform: scale(0.95); filter: brightness(0.8); }
+}
+
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-slide-up {
+  animation: slide-up 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.4s ease-out forwards;
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 8s linear infinite;
+}
+
+@keyframes pulse-gentle {
+  0%, 100% { transform: scale(1); filter: brightness(1); }
+  50% { transform: scale(1.02); filter: brightness(1.05); }
+}
+
+.animate-pulse-gentle {
+  animation: pulse-gentle 3s infinite ease-in-out;
+}
+
+/* Glass panel backing for Popups */
+.glass-overlay {
+  background-color: rgba(224, 229, 236, 0.65);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+@keyframes scan {
+  0% { left: 0%; }
+  100% { left: 100%; }
+}
+
+@keyframes soundwave {
+  0% { transform: scaleY(0.3); }
+  50% { transform: scaleY(1); }
+  100% { transform: scaleY(0.3); }
+}
