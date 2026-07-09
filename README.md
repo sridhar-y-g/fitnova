@@ -98,8 +98,3 @@ The interface balances modern operations telemetry with high-fidelity corporate 
 - **Connection Pool Overload**: Under heavy parallel ingestion loads, even with a global database singleton, Next.js serverless route scaling can run out of concurrent MySQL sockets on the database gateway.
 
 ---
-
-## 📹 Walkthrough Video Recording
-
-A video recording showcasing the full user flow (landing page navigation, live oscilloscope animations, dashboard loading, and scroll limit verification) is saved locally in the artifacts directory:
-- **[clean_ui_no_screws_1783617205691.webp](file:///C:/Users/Acer/.gemini/antigravity/brain/2d87cdad-68bd-4212-a584-0d63423ba31a/clean_ui_no_screws_1783617205691.webp)** (Open this file in any web browser to watch the animation).
