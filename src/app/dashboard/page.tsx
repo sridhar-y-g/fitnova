@@ -222,8 +222,20 @@ export default function Dashboard() {
       });
 
       if (!res.ok) {
-        const errorData = await res.json();
-        throw new Error(errorData.error || 'Ingestion failed');
+        let errorMsg = 'Ingestion failed';
+        try {
+          const contentType = res.headers.get('content-type');
+          if (contentType && contentType.includes('application/json')) {
+            const errorData = await res.json();
+            errorMsg = errorData.error || errorMsg;
+          } else {
+            const text = await res.text();
+            errorMsg = `Status ${res.status}: ${text.substring(0, 150)}`;
+          }
+        } catch (e) {
+          errorMsg = `Status ${res.status}: ${res.statusText}`;
+        }
+        throw new Error(errorMsg);
       }
 
       const result = await res.json();
