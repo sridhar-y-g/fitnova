@@ -43,6 +43,31 @@ Open **[http://localhost:3000](http://localhost:3000)** in your browser.
 
 ---
 
+## 📖 Step-by-Step Usage Guide
+
+### 1. Launch the Control Console
+- Open your browser to `http://localhost:3000`.
+- Click the safety-orange tactile button labeled **`[ LAUNCH CONTROL CONSOLE ]`**.
+
+### 2. Ingest Call Recording (Upload Raw Audio)
+- Click the **`INGEST CALL`** button located in the top-right control cluster.
+- In the slide-up modal:
+  1. Select the target **Advisor Pod** (e.g. Rohan M., Vikram S.).
+  2. Select your raw audio file (`.mp3`, `.wav`, or `.aac`) from your local file system.
+  3. Click **`CONFIRM INGESTION`**.
+- *Processing*: The raw audio is streamed directly to the **Gemini 2.5 Flash API** (or resolved via template simulation fallback if no key is defined). The engine transcribes Hinglish dialogues, runs safety-compliance scoring, and persists the record to the TiDB cloud database.
+
+### 3. Review Call Transcripts & Analytics
+- Select the advisor call in the **Coaching Queue & Audit Registry** table.
+- Press **Play** in the audio deck simulator.
+- View the speaker-diarized transcript conversation bubbles. The red messages highlight compliance infractions.
+
+### 4. Contest AI Compliance Flags
+- View the compliance details card at the bottom right.
+- If a flag is incorrect or contextually justified, click **`CONTEST THIS AI FLAG`**. The status will instantly switch to **`APPEALED`** in the live TiDB database to alert the Pod Leader.
+
+---
+
 ## ⚙️ Architecture: Real vs. Mocked
 
 | Component | Status | Technical Details |

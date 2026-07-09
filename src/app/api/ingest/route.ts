@@ -147,7 +147,7 @@ For each flag raised, include the exact quoted line from the transcript, a times
 Respond strictly in JSON format matching the schema provided.`;
 
         const response = await ai.models.generateContent({
-          model: 'gemini-2.5-flash',
+          model: 'gemini-3.1-flash-lite',
           contents: [
             {
               inlineData: {
