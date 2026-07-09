@@ -55,7 +55,7 @@ Open **[http://localhost:3000](http://localhost:3000)** in your browser.
   1. Select the target **Advisor Pod** (e.g. Rohan M., Vikram S.).
   2. Select your raw audio file (`.mp3`, `.wav`, or `.aac`) from your local file system.
   3. Click **`CONFIRM INGESTION`**.
-- *Processing*: The raw audio is streamed directly to the **Gemini 2.5 Flash API** (or resolved via template simulation fallback if no key is defined). The engine transcribes Hinglish dialogues, runs safety-compliance scoring, and persists the record to the TiDB cloud database.
+- *Processing*: The raw audio is streamed directly to the **Gemini 3.1 Flash-Lite API** (or resolved via template simulation fallback if no key is defined). The engine transcribes Hinglish dialogues, runs safety-compliance scoring, and persists the record to the TiDB cloud database.
 
 ### 3. Review Call Transcripts & Analytics
 - Select the advisor call in the **Coaching Queue & Audit Registry** table.
@@ -73,7 +73,7 @@ Open **[http://localhost:3000](http://localhost:3000)** in your browser.
 | Component | Status | Technical Details |
 | :--- | :--- | :--- |
 | **Database** | **100% REAL** | Connected to a live cloud **TiDB Serverless** instance at `gateway01.ap-southeast-1.prod.alicloud.tidbcloud.com:4000`. Direct operations are handled via a global Prisma connection singleton to prevent connection pool exhaustion. |
-| **Analysis Engine** | **REAL / HYBRID** | Connects to the **Gemini 2.5 Flash API** using the `@google/genai` client. It transcribes audio and generates compliance tags. If no API key or audio file is provided, it falls back to high-fidelity simulated Hinglish transcripts and scores to guarantee smooth testing. |
+| **Analysis Engine** | **REAL / HYBRID** | Connects to the **Gemini 3.1 Flash-Lite API** using the `@google/genai` client. It transcribes audio and generates compliance tags. If no API key or audio file is provided, it falls back to high-fidelity simulated Hinglish transcripts and scores to guarantee smooth testing. |
 | **Dispute & Appeal Loop** | **100% REAL** | Clicking **CONTEST THIS AI FLAG** sends a real `PATCH` request to the database via `/api/flags/[id]/contest`, updating the appeal status flag in real-time. |
 | **Audio Playback Deck** | **MOCKED** | The tactile waveform visualization and playback timer mimic active telemetry streaming. The waveform is rendered dynamically via canvas height bars that animate in sync with the simulated playhead. |
 
