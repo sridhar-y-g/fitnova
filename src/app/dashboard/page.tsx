@@ -196,6 +196,13 @@ export default function Dashboard() {
       alert('Please select an audio file first.');
       return;
     }
+
+    // Vercel Serverless payload limit is 4.5MB
+    const MAX_FILE_SIZE = 4.5 * 1024 * 1024;
+    if (uploadFile.size > MAX_FILE_SIZE) {
+      alert(`The selected file (${(uploadFile.size / (1024 * 1024)).toFixed(2)}MB) exceeds Vercel's Serverless payload limit of 4.5MB.\n\nPlease select a compressed audio file or smaller clip.`);
+      return;
+    }
     
     try {
       setUploading(true);
